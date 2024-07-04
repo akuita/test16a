@@ -1,4 +1,10 @@
 @layer button {
+  /* Added styles for the AttendanceSystem page buttons */
+  .attendanceSystemButton {
+    background-color: rgba(61, 84, 249, 1);
+    color: rgba(255, 255, 255, 1);
+  }
+
   .link_tag {
     color: inherit;
     text-decoration: none;
@@ -47,6 +53,10 @@
     border-color: transparent;
     background: transparent;
     box-shadow: none;
+  }
+
+  .attendanceSystemButtonDisabled {
+    background-color: rgba(168, 168, 168, 1);
   }
 }
 

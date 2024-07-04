@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react'
-
 import clsx from 'clsx'
-
+import { useTranslation } from 'next-i18next' // Import useTranslation hook
 import styles from './index.module.css'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   linkTo?: string
-  buttonType?: 'link' | 'text' | 'ghost' | 'default' | 'primary' | 'dashed'
+  buttonType?: 'link' | 'text' | 'ghost' | 'default' | 'primary' | 'dashed' | 'attendanceSystemButton' | 'attendanceSystemButtonDisabled'
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonProps, ref) => {
   const { buttonType = 'primary', title, className, children, linkTo, ...rest } = props
+  const { t } = useTranslation() // Initialize the translation hook
 
   const component = useMemo(() => {
     let component = children
@@ -18,7 +18,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonPr
       component = <span>{children || title}</span>
     }
 
-    if (linkTo) {
+    if (linkTo && buttonType !== 'attendanceSystemButton' && buttonType !== 'attendanceSystemButtonDisabled') {
       return (
         <a href={linkTo} className={styles.link_tag}>
           {component}
@@ -26,11 +26,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonPr
       )
     }
     return component
-  }, [linkTo, children, title])
+  }, [linkTo, children, title, buttonType])
+
+  // Use translation keys for button text
+  const buttonText = typeof children === 'string' ? t(`Button.${children}`) : component
 
   return (
-    <button ref={ref} className={clsx(className, styles.button, styles[buttonType])} {...rest}>
-      {component}
+    <button ref={ref} className={clsx(className, styles.button, styles[buttonType], {
+      [styles.attendanceSystemButton]: buttonType === 'attendanceSystemButton',
+      [styles.attendanceSystemButtonDisabled]: buttonType === 'attendanceSystemButtonDisabled',
+    })} {...rest}>
+      {buttonText}
     </button>
   )
 })
