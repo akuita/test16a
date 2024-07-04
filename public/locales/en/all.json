@@ -23,5 +23,29 @@
   "500": {
     "title": "System Error",
     "description": "Description about system error"
+  },
+  "AttendanceSystem": {
+    "logo": "Logo",
+    "attendanceSystem": "Attendance System",
+    "timeTracking": "Time tracking",
+    "timeSheet": "Time sheet",
+    "logout": "Logout",
+    "user": "User",
+    "userName": "Jack Daniel - Developer",
+    "calendar": "Calendar",
+    "date": "Wednesday, 27 September, 2023",
+    "time": "08:30:20",
+    "checkIn": "Check in",
+    "checkedOut": "Checked out"
+  },
+  "Button": {
+    "Check in": "Check in",
+    "Checked out": "Checked out"
+  },
+  "Modal": {
+    // Add any modal related translations here if needed in the future
+  },
+  "Toast": {
+    // Add any toast related translations here if needed in the future
   }
 }
